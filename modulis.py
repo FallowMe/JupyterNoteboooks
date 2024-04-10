@@ -82,3 +82,45 @@ class Txtreader():
         maximumas = self.maksimalusP()
         ats = maximumas / 1000 *100
         return ats   
+    
+
+class Mokinys():
+    def __init__(self, vardas, pavarde, pazymiai):
+        self.vardas = vardas
+        self.pavarde = pavarde
+        self.pazymiai = pazymiai
+        self.vid_max_min()
+
+    def vid_max_min(self):
+        vidurkis = sum(self.pazymiai)/len(self.pazymiai)
+        maximumas = max(self.pazymiai)
+        minimumas = min(self.pazymiai)
+        return (vidurkis, maximumas, minimumas)
+
+class Abiturientas(Mokinys): 
+    def __init__(self, vardas, pavarde, pazymiai, egzamino_pazymys):
+        super().__init__(vardas, pavarde, pazymiai) 
+        self.egzamino_pazymys = egzamino_pazymys
+
+    def bendras_vidurkis(self):
+         egzaminupazymiai = self.pazymiai + self.egzamino_pazymys
+         egzaminuvidurkis = sum(egzaminupazymiai)/len(egzaminupazymiai)
+         return egzaminuvidurkis
+
+class Mokykla():
+    def __init__(self):
+        self.Mokiniai = []
+
+    def addMokinys(self, mokinys):
+        self.Mokiniai.append(mokinys)
+
+    def removeMokinys(self, mokinys):
+        self.Mokiniai.remove(mokinys)
+
+    def VisuMokiniuVidurkis(self):
+        VisuMokiniuPazymiai = []
+        for mokinys1 in self.Mokiniai:
+            VisuMokiniuPazymiai.extend(mokinys1.pazymiai)  #extent leidzia sujungti skirtingus sarasus, prasiplecia sarasas, kuris nurodytas pries extend metoda
+        VisuMokiniuVidurkis = sum(VisuMokiniuPazymiai)/len(VisuMokiniuPazymiai)
+        return VisuMokiniuVidurkis
+    
